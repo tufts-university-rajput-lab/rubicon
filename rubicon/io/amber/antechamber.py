@@ -16,10 +16,10 @@ from monty.dev import requires
 from monty.os.path import which
 from monty.tempfile import ScratchDir
 
-from pymatgen.io.lammps.topology import Topology
+from pymatgen.io.lammps.data import Topology
 from rubicon.io.lammps.topology import correct_corrupted_top_files, \
     TopCorruptionException
-from pymatgen.io.lammps.force_field import ForceField
+from pymatgen.io.lammps.data import ForceField
 from rubicon.io.lammps.force_field import correct_corrupted_frcmod_files, \
     FFCorruptionException
 
@@ -32,7 +32,7 @@ class AntechamberRunner(object):
     A wrapper for AntechamberRunner software
     """
 
-    @requires(which('parmchk'), "Requires the binary parmchk."
+    @requires(which('parmchk2'), "Requires the binary parmchk."
                                 "Install AmberTools from http://ambermd.org/#AmberTools")
     @requires(which('antechamber'), "Requires the binary antechamber."
                                     "Install AmberTools from http://ambermd.org/#AmberTools")
@@ -58,9 +58,10 @@ class AntechamberRunner(object):
         """
         run antechamber using the provided gaussian output file
         """
-        command = "antechamber -i {} -fi {} -o {} -fo {} -c {} -s {}".format(filename,
+        command = "antechamber -i {} -fi {} -o {}.{} -fo {} -c {} -s {}".format(filename,
                                                                              infile_format,
                                                                              outfile_name,
+                                                                             outfile_format,
                                                                              outfile_format,
                                                                              charge_method,
                                                                              status_info)

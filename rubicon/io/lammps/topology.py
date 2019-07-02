@@ -10,8 +10,8 @@ angles and dihedrals
 WARNING: I do not think the amber stuff are consistent
 """
 
-from rubicon.io.lammps import lammps_warning
-lammps_warning()
+# from rubicon.io.lammps import lammps_warning
+# lammps_warning()
 
 import six
 from six.moves import range
